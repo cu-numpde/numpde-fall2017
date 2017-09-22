@@ -75,7 +75,7 @@ Graduate students in computer science or simulation-based science or engineering
 ### Resources (updated continuously)
 
 * http://www.siam.org/students/memberships.php (SIAM Membership is free for CU students, 30% discount on SIAM books)
-* https://faculty.washington.edu/rjl/fdmbook/
+* https://faculty.washington.edu/rjl/fdmbook/ (CU students can [download free from SIAM](http://epubs.siam.org/doi/book/10.1137/1.9780898717839))
 * https://depts.washington.edu/clawpack/book.html
 * https://people.maths.ox.ac.uk/trefethen/spectral.html
 * Elman, Silvester, Wathen, *Finite Elements and Fast Iterative Solvers with Applications in Incompressible Fluid Dynamics*
