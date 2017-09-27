@@ -28,3 +28,9 @@ def chebeval(z, n=None):
         dTz[:,n]  = n * (2*Tz[:,n-1] + dTz[:,n-2]/(n-2))
         ddTz[:,n] = n * (2*dTz[:,n-1] + ddTz[:,n-2]/(n-2))
     return [Tz, dTz, ddTz]
+
+def fdstencil(z, x):
+    x = numpy.array(x)
+    V = numpy.vander(x - z, increasing=True)
+    scaling = numpy.array([numpy.math.factorial(i) for i in range(len(x))])
+    return (numpy.linalg.inv(V).T * scaling).T
