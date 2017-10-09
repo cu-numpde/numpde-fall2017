@@ -18,6 +18,10 @@ https://gitter.im/cucs-numpde/Lobby
 
 ## Homeworks
 
+## Homework 2: due 2017-10-18
+Announced on 2017-10-09 in FDTransient.ipynb.  Solves a nonlinear ODE
+using an adaptive Runge-Kutta method.
+
 ### Homework 1: due 2017-09-25
 Announced on 2017-09-25 in FDHighOrder.ipynb.  Solves second order ODE
 using Chebyshev methods.
