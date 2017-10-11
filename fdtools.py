@@ -29,8 +29,68 @@ def chebeval(z, n=None):
         ddTz[:,n] = n * (2*dTz[:,n-1] + ddTz[:,n-2]/(n-2))
     return [Tz, dTz, ddTz]
 
-def fdstencil(z, x):
+def fdstencilV(z, x):
+    """Compute finite difference weights using a Vandermonde matrix"""
     x = numpy.array(x)
     V = numpy.vander(x - z, increasing=True)
     scaling = numpy.array([numpy.math.factorial(i) for i in range(len(x))])
     return (numpy.linalg.inv(V).T * scaling).T
+
+def fdstencil(z, x, nderiv=None):
+    """Compute finite difference weights using recurrences for Lagrange polynomials (see Fornberg 1998)"""
+    if nderiv is None:
+        nderiv = len(x)
+    x = numpy.array(x) - z
+    k = numpy.arange(nderiv+1)
+    c = numpy.outer(0.*k, x)
+    c[0,0] = 1
+    prod = 1
+    for j in range(1,len(x)):
+        dx = x[j] - x[:j]
+        c[1:,j] = x[j-1]*c[1:,j-1] - k[1:]*c[:-1,j-1]
+        c[0,j] = x[j-1]*c[0,j-1]
+        c[:,j] *= -prod
+        prod = numpy.prod(dx)
+        c[:,j] /= prod
+        c[1:,:j] = (x[j]*c[1:,:j] - k[1:,None]*c[:-1,:j]) / dx
+        c[0,:j]  =  x[j]*c[0,:j] / dx
+    return c
+
+def fdcompact(z, x, k):
+    """Compute a compact (implicit) differencing scheme
+
+         b @ u^(k)(z) = c @ u(x)
+
+       that maximizes the accuracy of u^(k)(z[0])."""
+    z = numpy.array(z)
+    x = numpy.array(x)
+    n = len(x)
+    x = x - z[0]
+    z = z - z[0]
+    xmin, xmax = min(x), max(x)
+    dx = (xmax - xmin) / (n - 1)
+    y = numpy.zeros(n + len(z) - 1)
+    y[:n] = x
+    for i in range(1, len(z)):
+        if (z[i] < 0):
+            xmin -= dx
+            y[n + i - 1] = xmin
+        else:
+            xmax += dx
+            y[n + i - 1] = xmax
+    S = numpy.array([fdstencil(t, y, k)[k] for t in z])
+    b = numpy.ones(len(z))
+    T = S[1:,n:].T
+    b[1:] = numpy.linalg.lstsq(T, -S[0,n:])[0]
+    c = b.dot(S[:,:n])
+    return b, c
+
+def dispersion(z, x, b, c):
+    from matplotlib import pyplot
+    theta = numpy.linspace(0, numpy.pi, 100)[1:]
+    phiz = numpy.exp(1j*numpy.outer(z, theta))
+    phix = numpy.exp(1j*numpy.outer(x, theta))
+    pyplot.plot(theta, (c.dot(phix) / b.dot(phiz)).imag, '.')
+    pyplot.plot(theta, theta)
+    pyplot.plot(theta, numpy.sin(theta))
+    pyplot.show()
