@@ -94,3 +94,36 @@ def dispersion(z, x, b, c):
     pyplot.plot(theta, theta)
     pyplot.plot(theta, numpy.sin(theta))
     pyplot.show()
+
+def rk_butcher_4():
+    A = numpy.array([[0,0,0,0],[.5,0,0,0],[0,.5,0,0],[0,0,1,0]])
+    b = numpy.array([1/6, 1/3, 1/3, 1/6])
+    return A, b
+
+def ode_rkexplicit(f, u0, butcher=None, tfinal=1, h=.1):
+    if butcher is None:
+        A, b = rk_butcher_4()
+    else:
+        A, b = butcher
+    c = numpy.sum(A, axis=1)
+    s = len(c)
+    u = u0.copy()
+    t = 0
+    hist = [(t,u0)]
+    while t < tfinal:
+        if tfinal - t < 1.01*h:
+            h = tfinal - t
+            tnext = tfinal
+        else:
+            tnext = t + h
+        h = min(h, tfinal - t)
+        fY = numpy.zeros((len(u0), s))
+        for i in range(s):
+            Yi = u.copy()
+            for j in range(i):
+                Yi += h * A[i,j] * fY[:,j]
+            fY[:,i] = f(t + h*c[i], Yi)
+        u += h * fY.dot(b)
+        t = tnext
+        hist.append((t, u.copy()))
+    return hist
