@@ -75,9 +75,10 @@ Graduate students in computer science or simulation-based science or engineering
 ### Resources (updated continuously)
 
 * http://www.siam.org/students/memberships.php (SIAM Membership is free for CU students, 30% discount on SIAM books)
-* https://faculty.washington.edu/rjl/fdmbook/ (CU students can [download free from SIAM](http://epubs.siam.org/doi/book/10.1137/1.9780898717839))
-* https://depts.washington.edu/clawpack/book.html
-* https://people.maths.ox.ac.uk/trefethen/spectral.html (CU students can [download free from SIAM](http://epubs.siam.org/doi/book/10.1137/1.9780898719598))
+* [LeVeque, *Finite Difference Methods for Ordinary and Partial Differential Equations*](https://faculty.washington.edu/rjl/fdmbook/) (CU students can [download free from SIAM](http://epubs.siam.org/doi/book/10.1137/1.9780898717839))
+* [LeVeque, *Finite Volume Methods for Hyperbolic Problems*](https://depts.washington.edu/clawpack/book.html) and the [Clawpack software](http://www.clawpack.org/).
+* [Toro, *Riemann Solvers and Numerical Methods for Fluid Dynamics*](https://link.springer.com/book/10.1007%2Fb79761#toc). (CU students can download free)
+* [Trefethen, *Spectral Methods in MATLAB*](https://people.maths.ox.ac.uk/trefethen/spectral.html). (CU students can [download free from SIAM](http://epubs.siam.org/doi/book/10.1137/1.9780898719598))
 * Elman, Silvester, Wathen, *Finite Elements and Fast Iterative Solvers with Applications in Incompressible Fluid Dynamics*
 
 ### Disability Accommodations
