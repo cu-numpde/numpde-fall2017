@@ -18,7 +18,12 @@ https://gitter.im/cucs-numpde/Lobby
 
 ## Homeworks
 
-## Homework 3: due 2018-11-03
+## Homework 4: due 2017-11-17
+Announced on 2017-11-06 in FVHyperbolic.ipynb.  Solves the shallow water
+equations using different Riemann solvers and monotone reconstruction
+methods.
+
+## Homework 3: due 2017-11-03
 Announced on 2017-10-25 in FD2D.ipynb.  Solves a nonlinear elliptic
 equation using Picard and Newton-Krylov methods.
 

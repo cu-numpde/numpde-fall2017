@@ -100,6 +100,13 @@ def rk_butcher_4():
     b = numpy.array([1/6, 1/3, 1/3, 1/6])
     return A, b
 
+def rk_butcher_ssp32():
+    A = numpy.array([[0, 0, 0],
+                     [1/2, 0, 0],
+                     [1/2, 1/2, 0]])
+    b = numpy.array([1/3, 1/3, 1/3])
+    return A, b
+
 def ode_rkexplicit(f, u0, butcher=None, tfinal=1, h=.1):
     if butcher is None:
         A, b = rk_butcher_4()
